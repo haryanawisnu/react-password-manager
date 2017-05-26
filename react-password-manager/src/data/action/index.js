@@ -10,7 +10,21 @@ export const SET_USERNAME = 'SET_USERNAME'
 export const SET_PASSWORD = 'SET_PASSWORD'
 export const SET_ID = 'SET_ID'
 export const RESET = 'RESET'
+export const SET_INDEX = 'SET_INDEX'
+export const SET_CREATED = 'SET_CREATED'
 
+export function setcreated(value) {
+  return {
+    type: SET_CREATED,
+    value
+  }
+}
+export function setindex(value) {
+  return {
+    type: SET_INDEX,
+    value
+  }
+}
 export function reset() {
   return {
     type: RESET
@@ -94,10 +108,11 @@ export function deletepassword(data) {
   }
 }
 
-export function updatePasswordSuccess(value) {
+export function updatePasswordSuccess(data) {
   return {
     type: UPDATE_PASSWORD,
-    value
+    password:data.password,
+    index:data.index
   }
 }
 
@@ -111,7 +126,11 @@ export function updatepassword(data) {
       updatedAt:new Date()
     })
     .then(function(response) {
-        dispatch(updatePasswordSuccess(data))
+        let obj={};
+        obj.password=response.data;
+        obj.index=data.index;
+        console.log('axis',obj);
+        dispatch(updatePasswordSuccess(obj))
     })
   }
 }

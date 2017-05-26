@@ -5,16 +5,27 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux'
 
-import { addpassword,seturl,setusername,setpassword,setid,reset } from '../data/action'
+import { addpassword,seturl,setusername,setpassword,setid,reset,updatepassword } from '../data/action'
 import '../style/css/form.css';
 
 class Form extends Component {
-  handleButton = () => {
+  handleButtonsave = () => {
     let obj={}
     obj.url=this.props.url;
     obj.username=this.props.username;
     obj.password=this.props.password;
     this.props.addpassword(obj);
+    this.props.reset();
+  }
+  handleButtonupdate = () => {
+    let obj={}
+    obj.id=this.props.id;
+    obj.url=this.props.url;
+    obj.username=this.props.username;
+    obj.password=this.props.password;
+    obj.index=this.props.index;
+    obj.createdAt=this.props.createdAt;
+    this.props.updatepassword(obj);
     this.props.reset();
   }
   handleurl = (event,value) => {
@@ -50,7 +61,8 @@ class Form extends Component {
           />
           <br/>
           <br/>
-          <RaisedButton label="Save" onTouchTap={this.handleButton}  />
+          <RaisedButton label="Save" onTouchTap={this.handleButtonsave}  />
+          <RaisedButton label="Update" onTouchTap={this.handleButtonupdate} style={{marginLeft:10}}  />
         </div>
       </div>
     );
@@ -62,12 +74,15 @@ const mapStateToProps = (state) => {
     id :state.id,
     url :state.url,
     username :state.username,
-    password :state.password
+    password :state.password,
+    createdAt :state.createdAt,
+    index:state.index
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    updatepassword: (data) => {dispatch(updatepassword(data))},
     addpassword: (data) => {dispatch(addpassword(data))},
     seturl: (data) => {dispatch(seturl(data))},
     setusername: (data) => {dispatch(setusername(data))},

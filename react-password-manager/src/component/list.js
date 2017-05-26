@@ -13,7 +13,7 @@ import tgl from 'tgl'
 import FlatButton from 'material-ui/FlatButton';
 import FontAwesome from 'react-fontawesome';
 
-import { seedpassword,addpassword,deletepassword,seturl,setusername,setpassword,setid } from '../data/action'
+import { seedpassword,addpassword,deletepassword,seturl,setusername,setpassword,setid,setindex,setcreated } from '../data/action'
 
 class List extends Component {
   constructor(props){
@@ -41,10 +41,15 @@ class List extends Component {
     this.setState({open: false});
   };
   handleselect = (event) => {
-    this.props.setid(this.props.list_password[event[0]].id);
-    this.props.seturl(this.props.list_password[event[0]].url);
-    this.props.setusername(this.props.list_password[event[0]].username);
-    this.props.setpassword(this.props.list_password[event[0]].password);
+    if(event.length>0){
+      this.props.setid(this.props.list_password[event[0]].id);
+      this.props.seturl(this.props.list_password[event[0]].url);
+      this.props.setusername(this.props.list_password[event[0]].username);
+      this.props.setpassword(this.props.list_password[event[0]].password);
+      this.props.setcreated(this.props.list_password[event[0]].createdAt);
+      this.props.setindex(event[0]);
+      console.log(event[0]);
+    }
   };
   render() {
     const actions = [
@@ -64,7 +69,7 @@ class List extends Component {
     ];
     return (
         <div>
-        <Table multiSelectable={false} onRowSelection={this.handleselect}>
+        <Table multiSelectable={false} onRowSelection={this.handleselect} selected={false}>
           <TableHeader adjustForCheckbox={false} displaySelectAll={false} >
             <TableRow>
               <TableHeaderColumn>URL</TableHeaderColumn>
@@ -75,7 +80,7 @@ class List extends Component {
               <TableHeaderColumn>Delete</TableHeaderColumn>
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody deselectOnClickaway={false}>
           {
             this.props.list_password.map((password,index) =>{
               return(
@@ -84,7 +89,7 @@ class List extends Component {
               <TableRowColumn>{password.username}</TableRowColumn>
               <TableRowColumn>{password.password}</TableRowColumn>
               <TableRowColumn>{tgl.kapan(new Date(password.createdAt))}</TableRowColumn>
-              <TableRowColumn>{password.updateAt ? tgl.kapan(new Date(password.updatedAt)) : '-'}</TableRowColumn>
+              <TableRowColumn>{password.updatedAt ? tgl.kapan(new Date(password.updatedAt)) : '-'}</TableRowColumn>
               <TableRowColumn><FlatButton backgroundColor="#D50000" hoverColor="#FF1744" icon={<FontAwesome name='trash' size='2x'/>} onTouchTap={this.handleOpen.bind(this,password.id,index)}/></TableRowColumn>
           </TableRow>
               )
@@ -109,10 +114,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     seedpassword: () => {dispatch(seedpassword())},
+    setindex: (data) => {dispatch(setindex(data))},
     addpassword: (data) => {dispatch(addpassword(data))},
     seturl: (data) => {dispatch(seturl(data))},
     setusername: (data) => {dispatch(setusername(data))},
     setpassword: (data) => {dispatch(setpassword(data))},
+    setcreated: (data) => {dispatch(setcreated(data))},
     setid: (data) => {dispatch(setid(data))},
     deletepassword: (data) => {dispatch(deletepassword(data))}
   }
