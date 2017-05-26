@@ -13,7 +13,7 @@ import tgl from 'tgl'
 import FlatButton from 'material-ui/FlatButton';
 import FontAwesome from 'react-fontawesome';
 
-import { seedpassword,addpassword,deletepassword } from '../data/action'
+import { seedpassword,addpassword,deletepassword,seturl,setusername,setpassword,setid } from '../data/action'
 
 class List extends Component {
   constructor(props){
@@ -40,8 +40,11 @@ class List extends Component {
     this.props.deletepassword(this.state.obj);
     this.setState({open: false});
   };
-  handleselect = (event,value) => {
-    console.log(event,value);
+  handleselect = (event) => {
+    this.props.setid(this.props.list_password[event[0]].id);
+    this.props.seturl(this.props.list_password[event[0]].url);
+    this.props.setusername(this.props.list_password[event[0]].username);
+    this.props.setpassword(this.props.list_password[event[0]].password);
   };
   render() {
     const actions = [
@@ -107,6 +110,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     seedpassword: () => {dispatch(seedpassword())},
     addpassword: (data) => {dispatch(addpassword(data))},
+    seturl: (data) => {dispatch(seturl(data))},
+    setusername: (data) => {dispatch(setusername(data))},
+    setpassword: (data) => {dispatch(setpassword(data))},
+    setid: (data) => {dispatch(setid(data))},
     deletepassword: (data) => {dispatch(deletepassword(data))}
   }
 }
