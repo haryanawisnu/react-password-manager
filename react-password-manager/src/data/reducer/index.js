@@ -45,6 +45,13 @@ function Password(state = initialState, action) {
         };
       })
     })
+    case SEARCH_PASSWORD:
+      let filtering = new RegExp(`${action.value}.*`);
+      let result=state.list_password.filter(password=>{
+                    return filtering.test(password[action.key].toLowerCase())
+                  })
+                  console.log('res',result);
+      return Object.assign({}, state, {list_password: result})
     case SET_ID:
     return Object.assign({}, state, {id: action.value})
     case SET_URL:

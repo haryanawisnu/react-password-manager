@@ -40,15 +40,19 @@ class Form extends Component {
 
   render() {
     return (
-      <div className="col-3 menu" style={{backgroundColor:'black'}}>
+      <div className="col-3 menu" >
         <div style={{marginLeft:'10%'}}>
           <TextField
            floatingLabelText="Url"
+           floatingLabelStyle={{color:'#00BCD4'}}
+           inputStyle={{color:'#757575'}}
            value={this.props.url}
            onChange={this.handleurl}
           /><br/>
           <TextField
            floatingLabelText="Username"
+           floatingLabelStyle={{color:'#00BCD4'}}
+           inputStyle={{color:'#757575'}}
            value={this.props.username}
            onChange={this.handleusername}
           />
@@ -56,13 +60,15 @@ class Form extends Component {
           <TextField
            type='password'
            floatingLabelText="Password"
+           floatingLabelStyle={{color:'#00BCD4'}}
+           inputStyle={{color:'#757575'}}
            value={this.props.password}
            onChange={this.handlepassword}
           />
           <br/>
           <br/>
-          <RaisedButton label="Save" onTouchTap={this.handleButtonsave}  />
-          <RaisedButton label="Update" onTouchTap={this.handleButtonupdate} style={{marginLeft:10}}  />
+          <RaisedButton label="Save" onTouchTap={this.handleButtonsave} backgroundColor='#00BCD4'  labelColor='#ffffff' />
+          <RaisedButton label="Update" onTouchTap={this.handleButtonupdate} backgroundColor='#00BCD4' labelColor='#ffffff' style={{marginLeft:10}}  />
         </div>
       </div>
     );

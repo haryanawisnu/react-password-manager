@@ -135,9 +135,10 @@ export function updatepassword(data) {
   }
 }
 
-export function searchpassword(key) {
+export function searchpassword(data) {
   return {
     type: SEARCH_PASSWORD,
-    key
+    key:data.key,
+    value:data.value
   }
 }

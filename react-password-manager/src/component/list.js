@@ -11,7 +11,6 @@ import Dialog from 'material-ui/Dialog';
 import { connect } from 'react-redux'
 import tgl from 'tgl'
 import FlatButton from 'material-ui/FlatButton';
-import FontAwesome from 'react-fontawesome';
 
 import { seedpassword,addpassword,deletepassword,seturl,setusername,setpassword,setid,setindex,setcreated } from '../data/action'
 
@@ -56,28 +55,26 @@ class List extends Component {
       <FlatButton
         label="Cancel"
         onTouchTap={this.handleClose1}
-        backgroundColor	='white' labelStyle={{color:'black'}}
+        backgroundColor='#00BCD4' hoverColor='#80DEEA' labelStyle={{color:'#ffffff'}}
         style={{marginRight:5}}
-        hoverColor='#F8BBD0'
       />,
       <FlatButton
         label="Discard"
         onTouchTap={this.handleClose2}
-        backgroundColor	='white' labelStyle={{color:'black'}}
-        hoverColor='#F8BBD0'
+        backgroundColor='#00BCD4' hoverColor='#80DEEA' labelStyle={{color:'#ffffff'}}
       />,
     ];
     return (
         <div>
-        <Table multiSelectable={false} onRowSelection={this.handleselect} selected={false}>
-          <TableHeader adjustForCheckbox={false} displaySelectAll={false} >
-            <TableRow>
-              <TableHeaderColumn>URL</TableHeaderColumn>
-              <TableHeaderColumn>Username</TableHeaderColumn>
-              <TableHeaderColumn>Password</TableHeaderColumn>
-              <TableHeaderColumn>CreatedAt</TableHeaderColumn>
-              <TableHeaderColumn>UpdateAt</TableHeaderColumn>
-              <TableHeaderColumn>Delete</TableHeaderColumn>
+        <Table multiSelectable={false} onRowSelection={this.handleselect} selected={false} >
+          <TableHeader adjustForCheckbox={false}  >
+            <TableRow >
+              <TableHeaderColumn style={{color:'#00BCD4'}} >URL</TableHeaderColumn>
+              <TableHeaderColumn style={{color:'#00BCD4'}}>Username</TableHeaderColumn>
+              <TableHeaderColumn style={{color:'#00BCD4'}}>Password</TableHeaderColumn>
+              <TableHeaderColumn style={{color:'#00BCD4'}}>CreatedAt</TableHeaderColumn>
+              <TableHeaderColumn style={{color:'#00BCD4'}}>UpdateAt</TableHeaderColumn>
+              <TableHeaderColumn style={{color:'#00BCD4'}}>Delete</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody deselectOnClickaway={false}>
@@ -85,12 +82,12 @@ class List extends Component {
             this.props.list_password.map((password,index) =>{
               return(
             <TableRow key={password.id}>
-              <TableRowColumn>{password.url}</TableRowColumn>
-              <TableRowColumn>{password.username}</TableRowColumn>
-              <TableRowColumn>{password.password}</TableRowColumn>
-              <TableRowColumn>{tgl.kapan(new Date(password.createdAt))}</TableRowColumn>
-              <TableRowColumn>{password.updatedAt ? tgl.kapan(new Date(password.updatedAt)) : '-'}</TableRowColumn>
-              <TableRowColumn><FlatButton backgroundColor="#D50000" hoverColor="#FF1744" icon={<FontAwesome name='trash' size='2x'/>} onTouchTap={this.handleOpen.bind(this,password.id,index)}/></TableRowColumn>
+              <TableRowColumn style={{color:'#757575'}}>{password.url}</TableRowColumn>
+              <TableRowColumn style={{color:'#757575'}}>{password.username}</TableRowColumn>
+              <TableRowColumn style={{color:'#757575'}}>{password.password}</TableRowColumn>
+              <TableRowColumn style={{color:'#757575'}}>{tgl.kapan(new Date(password.createdAt))}</TableRowColumn>
+              <TableRowColumn style={{color:'#757575'}}>{password.updatedAt ? tgl.kapan(new Date(password.updatedAt)) : '-'}</TableRowColumn>
+              <TableRowColumn><FlatButton label="Delete" backgroundColor='#00BCD4' hoverColor='#80DEEA' labelStyle={{color:'#ffffff'}} onTouchTap={this.handleOpen.bind(this,password.id,index)}/></TableRowColumn>
           </TableRow>
               )
             })
