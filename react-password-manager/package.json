@@ -6,6 +6,7 @@
     "axios": "^0.16.1",
     "immutable": "^3.8.1",
     "material-ui": "^0.18.1",
+    "material-ui-password-field": "^1.2.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-fontawesome": "^1.6.1",

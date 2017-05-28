@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 import tgl from 'tgl'
 import FlatButton from 'material-ui/FlatButton';
 
-import { seedpassword,addpassword,deletepassword,seturl,setusername,setpassword,setid,setindex,setcreated } from '../data/action'
+import { reset,seedpassword,addpassword,deletepassword,seturl,setusername,setpassword,setid,setindex,setcreated } from '../data/action'
 
 class List extends Component {
   constructor(props){
@@ -47,7 +47,8 @@ class List extends Component {
       this.props.setpassword(this.props.list_password[event[0]].password);
       this.props.setcreated(this.props.list_password[event[0]].createdAt);
       this.props.setindex(event[0]);
-      console.log(event[0]);
+    }else {
+      this.props.reset();
     }
   };
   render() {
@@ -59,13 +60,13 @@ class List extends Component {
         style={{marginRight:5}}
       />,
       <FlatButton
-        label="Discard"
+        label="Delete"
         onTouchTap={this.handleClose2}
         backgroundColor='#00BCD4' hoverColor='#80DEEA' labelStyle={{color:'#ffffff'}}
       />,
     ];
     return (
-        <div>
+        <div style={{border:'2px solid #00BCD4'}}>
         <Table multiSelectable={false} onRowSelection={this.handleselect} selected={false} >
           <TableHeader adjustForCheckbox={false}  >
             <TableRow >
@@ -77,11 +78,11 @@ class List extends Component {
               <TableHeaderColumn style={{color:'#00BCD4'}}>Delete</TableHeaderColumn>
             </TableRow>
           </TableHeader>
-          <TableBody deselectOnClickaway={false}>
+          <TableBody deselectOnClickaway={false} >
           {
             this.props.list_password.map((password,index) =>{
               return(
-            <TableRow key={password.id}>
+            <TableRow key={password.id} >
               <TableRowColumn style={{color:'#757575'}}>{password.url}</TableRowColumn>
               <TableRowColumn style={{color:'#757575'}}>{password.username}</TableRowColumn>
               <TableRowColumn style={{color:'#757575'}}>{password.password}</TableRowColumn>
@@ -94,8 +95,9 @@ class List extends Component {
           }
           </TableBody>
         </Table>
-        <Dialog actions={actions}  modal={false} open={this.state.open} onRequestClose={this.handleClose} bodyStyle={{color:'white'}}>
-            Discard this chart?
+        <Dialog
+          title="DELETE!" titleStyle={{color:'#00838F'}} actions={actions}  modal={false} open={this.state.open} onRequestClose={this.handleClose} bodyStyle={{color:'#ffffff'}} >
+          <div style={{color:'#00ACC1'}}>Delete this Password?</div>
         </Dialog>
         </div>
     );
@@ -118,7 +120,8 @@ const mapDispatchToProps = (dispatch) => {
     setpassword: (data) => {dispatch(setpassword(data))},
     setcreated: (data) => {dispatch(setcreated(data))},
     setid: (data) => {dispatch(setid(data))},
-    deletepassword: (data) => {dispatch(deletepassword(data))}
+    deletepassword: (data) => {dispatch(deletepassword(data))},
+    reset: (data) => {dispatch(reset(data))}
   }
 }
 

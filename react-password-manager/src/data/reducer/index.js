@@ -14,7 +14,7 @@ import {
 } from '../action'
 
 const initialState = {
-  id:'',
+  id:null,
   url:'',
   username:'',
   password:'',
@@ -65,7 +65,7 @@ function Password(state = initialState, action) {
     case SET_INDEX:
     return Object.assign({}, state, {index: action.value})
     case RESET:
-    return Object.assign({}, state, {url:'',username:'',password: ''})
+    return Object.assign({}, state, {id:null,url:'',username:'',password: ''})
     default:
       return state
   }

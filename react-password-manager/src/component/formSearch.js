@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarSeparator,ToolbarGroup} from 'material-ui/Toolbar';
 import { connect } from 'react-redux'
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-import {searchpassword} from '../data/action'
+import {searchpassword,seedpassword} from '../data/action'
 
 class FormSearch extends Component {
   constructor(props){
@@ -27,7 +26,7 @@ class FormSearch extends Component {
     this.setState({
       leng: this.state.leng-1,
     });
-      this.props.searchpassword(obj);
+      this.props.seedpassword();
     }
   };
 
@@ -66,7 +65,8 @@ class FormSearch extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    searchpassword: (value) => {dispatch(searchpassword(value))}
+    searchpassword: (value) => {dispatch(searchpassword(value))},
+    seedpassword: () => {dispatch(seedpassword())}
   }
 }
 export default connect(null,mapDispatchToProps)(FormSearch);
