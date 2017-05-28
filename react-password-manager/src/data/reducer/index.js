@@ -27,9 +27,9 @@ const initialState = {
 function Password(state = initialState, action) {
   switch (action.type) {
     case SEED_PASSWORD:
-    return Object.assign({}, state, {list_password: action.value})
+    return Object.assign({}, state, {list_password: action.value.reverse()})
     case ADD_PASSWORD:
-      return {...state,list_password: [...state.list_password, action.value]}
+      return {...state,list_password: [action.value, ...state.list_password ]}
     case REMOVE_PASSWORD:
       return Object.assign({}, state, {list_password: [
         ...state.list_password.slice(0, action.index),

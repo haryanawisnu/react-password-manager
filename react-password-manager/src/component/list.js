@@ -6,6 +6,7 @@ import {
   TableHeaderColumn,
   TableRow,
   TableRowColumn,
+  TableFooter
 } from 'material-ui/Table';
 import Dialog from 'material-ui/Dialog';
 import { connect } from 'react-redux'
@@ -67,9 +68,9 @@ class List extends Component {
     ];
     return (
         <div style={{border:'2px solid #00BCD4'}}>
-        <Table multiSelectable={false} onRowSelection={this.handleselect} selected={false} >
-          <TableHeader adjustForCheckbox={false}  >
-            <TableRow >
+        <Table fixedHeader={true} height='430'  multiSelectable={false} onRowSelection={this.handleselect}  >
+          <TableHeader adjustForCheckbox={false} enableSelectAll={false}>
+            <TableRow>
               <TableHeaderColumn style={{color:'#00BCD4'}} >URL</TableHeaderColumn>
               <TableHeaderColumn style={{color:'#00BCD4'}}>Username</TableHeaderColumn>
               <TableHeaderColumn style={{color:'#00BCD4'}}>Password</TableHeaderColumn>
@@ -78,7 +79,7 @@ class List extends Component {
               <TableHeaderColumn style={{color:'#00BCD4'}}>Delete</TableHeaderColumn>
             </TableRow>
           </TableHeader>
-          <TableBody deselectOnClickaway={false} >
+          <TableBody deselectOnClickaway={false} style={{overflow:'visible'}} >
           {
             this.props.list_password.map((password,index) =>{
               return(
