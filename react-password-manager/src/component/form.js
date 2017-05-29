@@ -18,6 +18,7 @@ class Form extends Component {
       valid2:false,
       valid3:false,
       valid4:false,
+      valid5:false,
       confrimPassword:'',
       validUrl:'',
       validUsername:'',
@@ -48,7 +49,7 @@ class Form extends Component {
         validUsername:'this required!'
       });
     }else if (this.props.password===this.state.confrimPassword) {
-        if (this.state.valid1&&this.state.valid2&&this.state.valid3&&this.state.valid4) {
+        if (this.state.valid1&&this.state.valid2&&this.state.valid3&&this.state.valid4&&this.state.valid5) {
           return true;
         }else {
           this.setState({
@@ -149,6 +150,15 @@ class Form extends Component {
         valid4:false
       });
     }
+    if(value.length>5) {
+      this.setState({
+        valid5:true
+      });
+    }else {
+      this.setState({
+        valid5:false
+      });
+    }
     this.props.setpassword(value);
   }
 
@@ -225,6 +235,12 @@ class Form extends Component {
             labelStyle={{color:'#00BCD4'}}
             style={{marginBottom: 16}}
             checked={this.state.valid4}
+          />
+          <Toggle
+            label="At least length > 5 !"
+            labelStyle={{color:'#00BCD4'}}
+            style={{marginBottom: 16}}
+            checked={this.state.valid5}
           />
           <Dialog
           actions={actions}

@@ -4,10 +4,14 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.1",
+    "chai": "^4.0.0",
+    "enzyme": "^2.8.2",
     "immutable": "^3.8.1",
+    "jsdom": "^11.0.0",
     "material-ui": "^0.18.1",
     "material-ui-password-field": "^1.2.0",
     "react": "^15.5.4",
+    "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.5.4",
     "react-fontawesome": "^1.6.1",
     "react-redux": "^5.0.5",
@@ -19,7 +23,13 @@
     "tgl": "^1.1.3"
   },
   "devDependencies": {
-    "react-scripts": "1.0.6"
+    "babel-jest": "^20.0.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "ignore-styles": "^5.0.1",
+    "jest": "^20.0.4",
+    "react-scripts": "1.0.6",
+    "react-test-renderer": "^15.5.4"
   },
   "scripts": {
     "start": "react-scripts start",
